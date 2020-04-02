@@ -263,14 +263,14 @@ if __name__ == "__main__":
 #    render_tiles(bbox, mapfile, tile_dir, 1, 11 , "Europe+")
 
 # Greater london
-bbox = (-0.574036,51.237727,0.299377,51.725249)
-render_tiles(bbox, '/tmp/openstreetmap-carto/osm.xml', '/tmp/tiles/', 1, 11, "GreaterLondon")
+    bbox = (-0.574036,51.237727,0.299377,51.725249)
+    render_tiles(bbox, '/tmp/openstreetmap-carto/osm.xml', '/tmp/tiles/', 1, 11, "GreaterLondon")
 
 
 # UK
 #    bbox = (-8.1775098,49.674,2.0919117,61.061)
 #    render_tiles(bbox, '/tmp/openstreetmap-carto/osm.xml', '/tmp/tiles/', 1, 16, "UK")
 
-#    bbox = (8.4213643278, 53.3949251389, 10.3242585128, 53.9644376366)
+#    bbox = (8.4213643278, 53.3949251389, 10.3242582568, 53.9644376366)
 #    render_tiles(bbox, '/tmp/openstreetmap-carto/osm.xml', '/tmp/tiles/', 1, 16, "Hamburg")
     os._exit(0)
