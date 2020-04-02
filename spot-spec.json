@@ -4,15 +4,15 @@
 	    "DeviceName": "/dev/sda1",
 	    "Ebs": {
 		"DeleteOnTermination": true,
-		"VolumeSize": 50,
+		"VolumeSize": 200,
 		"VolumeType": "gp2"
 	    }
 	}
     ],
     "EbsOptimized": true,
-    "ImageId": "ami-00b36349b3dba2ec3",
-    "InstanceType": "c4.4xlarge",
-    "KeyName": "thukidides-keypair",
+    "ImageId": "ami-06f77073d7dc4c48a",
+    "InstanceType": "c5.4xlarge",
+    "KeyName": "default",
     "Monitoring": {
 	"Enabled": false
     },
@@ -20,7 +20,7 @@
 	{
 	    "AssociatePublicIpAddress": true,
 	    "DeleteOnTermination": true,
-	    "Groups": [ "sg-8e8783eb" ],
+	    "Groups": [ "sg-0ffdd06cb851850dc" ],
 	    "DeviceIndex": 0
 	}
     ]

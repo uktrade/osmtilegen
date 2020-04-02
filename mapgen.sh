@@ -7,7 +7,7 @@ set -xe
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | \
     sudo apt-key add -
 
-sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main" >> /etc/apt/sources.list.d/postgresql.list'
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main" >> /etc/apt/sources.list.d/postgresql.list'
 sudo apt-get update
 sudo apt-get -y install postgresql-10 postgresql-10-postgis-2.5  unzip
 
@@ -27,10 +27,13 @@ sudo apt-get -y install osm2pgsql
 
 cd /tmp
 
-#wget https://planet.openstreetmap.org/planet/planet-latest.osm.bz2
-wget https://download.geofabrik.de/europe/germany/hamburg-latest.osm.bz2
+# wget https://planet.openstreetmap.org/planet/planet-latest.osm.bz2
+# wget https://download.geofabrik.de/europe/germany/hamburg-latest.osm.bz2
+# wget https://download.geofabrik.de/europe/great-britain/england/greater-london-latest.osm.bz2
+wget https://download.geofabrik.de/europe/great-britain-latest.osm.bz2
 
-bzip2 -d hamburg-latest.osm.bz2
+
+bzip2 -d great-britain-latest.osm.bz2
 
 wget https://svn.openstreetmap.org/applications/rendering/mapnik/generate_image.py
 
@@ -66,7 +69,7 @@ sudo apt-get install -y libboost-all-dev libmapnik-dev python-mapnik
 
 # INSTALL fonts
 
-sudo apt-get install -y ttf-unifont fonts-noto-cjk fonts-noto-hinted fonts-noto-unhinted
+sudo apt-get install -y ttf-unifont fonts-noto-cjk fonts-noto-hinted fonts-noto-unhinted fontconfig
 
 cd /tmp
 
@@ -94,7 +97,7 @@ sudo apt-get install -y mapnik-utils
 
 ./scripts/get-shapefiles.py
 
-sudo su - postgres -c "cd /tmp/openstreetmap-carto; osm2pgsql -G --hstore --style openstreetmap-carto.style --tag-transform-script openstreetmap-carto.lua -d gis ../hamburg-latest.osm" 
+sudo su - postgres -c "cd /tmp/openstreetmap-carto; osm2pgsql -G --hstore --cache 10000 --style openstreetmap-carto.style --tag-transform-script openstreetmap-carto.lua -d gis ../great-britain-latest.osm"
 
 sudo -u postgres mkdir -p /tmp/tiles
 
@@ -104,4 +107,4 @@ sudo -u postgres python ../gen-tiles.py
 
 cd /tmp
 
-tar cf tiles.tar tiles
+# tar cf tiles.tar tiles

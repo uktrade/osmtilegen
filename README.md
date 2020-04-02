@@ -1,6 +1,6 @@
-# Nomaden map generation
+# Ports Dashboard map generation
 
-This set of scripts creates OpenStreetMap tiles of Hamburg for the Nomaden site. It spins up a spot instance on EC2, installs all the necessary stuff and then downloads the raw map database and renders the tiles.
+This set of scripts creates OpenStreetMap tiles of UK for the Ports Dashboard site, this is forked from Noblestreet/osmtilegen. It spins up a instance on EC2, installs all the necessary stuff and then downloads the raw map database and renders the tiles.
 
 After we're finished you'll find a `tile.tar` in the local directory.
 
@@ -12,7 +12,7 @@ See here for more info: [ofosos.org](https://ofosos.org/2018/11/04/osm-tile-crea
  - boto3
  - netcat
  - bash
- 
+
 ## Running
 
 Be sure to set something similar to the following in you ssh client config or the connection may time out while generating the tiles.
@@ -36,6 +36,7 @@ Copyright (c) 2018, Mark Meyer (mark@ofosos.org)
 
 ## Links
 
+https://github.com/Noblestreet/osmtilegen/
 https://wiki.openstreetmap.org/wiki/Creating_your_own_tiles
 https://github.com/mapnik/mapnik/blob/master/INSTALL.md
 https://github.com/gravitystorm/openstreetmap-carto/blob/master/INSTALL.md

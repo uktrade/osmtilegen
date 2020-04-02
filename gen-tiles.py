@@ -18,7 +18,7 @@ DEG_TO_RAD = pi/180
 RAD_TO_DEG = 180/pi
 
 # Default number of rendering threads to spawn, should be roughly equal to number of CPU cores available
-NUM_THREADS = 16
+NUM_THREADS = 4
 
 
 def minmax (a,b,c):
@@ -40,14 +40,14 @@ class GoogleProjection:
             self.zc.append((e,e))
             self.Ac.append(c)
             c *= 2
-                
+
     def fromLLtoPixel(self,ll,zoom):
          d = self.zc[zoom]
          e = round(d[0] + ll[0] * self.Bc[zoom])
          f = minmax(sin(DEG_TO_RAD * ll[1]),-0.9999,0.9999)
          g = round(d[1] + 0.5*log((1+f)/(1-f))*-self.Cc[zoom])
          return (e,g)
-     
+
     def fromPixelToLL(self,px,zoom):
          e = self.zc[zoom]
          f = (px[0] - e[0])/self.Bc[zoom]
@@ -156,7 +156,7 @@ def render_tiles(bbox, mapfile, tile_dir, minZoom=1,maxZoom=18, name="unknown", 
     if not os.path.isdir(tile_dir):
          os.mkdir(tile_dir)
 
-    gprj = GoogleProjection(maxZoom+1) 
+    gprj = GoogleProjection(maxZoom+1)
 
     ll0 = (bbox[0],bbox[3])
     ll1 = (bbox[2],bbox[1])
@@ -262,6 +262,15 @@ if __name__ == "__main__":
 #    bbox = (1.0,10.0, 20.6,50.0)
 #    render_tiles(bbox, mapfile, tile_dir, 1, 11 , "Europe+")
 
-    bbox = (8.4213643278, 53.3949251389, 10.3242585128, 53.9644376366)
-    render_tiles(bbox, '/tmp/openstreetmap-carto/osm.xml', '/tmp/tiles/', 1, 16, "Hamburg")
+# Greater london
+bbox = (-0.574036,51.237727,0.299377,51.725249)
+render_tiles(bbox, '/tmp/openstreetmap-carto/osm.xml', '/tmp/tiles/', 1, 11, "GreaterLondon")
+
+
+# UK
+#    bbox = (-8.1775098,49.674,2.0919117,61.061)
+#    render_tiles(bbox, '/tmp/openstreetmap-carto/osm.xml', '/tmp/tiles/', 1, 16, "UK")
+
+#    bbox = (8.4213643278, 53.3949251389, 10.3242585128, 53.9644376366)
+#    render_tiles(bbox, '/tmp/openstreetmap-carto/osm.xml', '/tmp/tiles/', 1, 16, "Hamburg")
     os._exit(0)
